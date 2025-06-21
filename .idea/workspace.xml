@@ -4,14 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Juliana-Space-Invaders.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="Project Setup &amp; basic game window">
+      <change afterPath="$PROJECT_DIR$/fonts/Copperplate.ttc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/Courier New Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/Phosphate.ttc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fonts/SnellRoundhand.ttc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Sand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/bggame.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/bggameover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/bgmain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/bgwin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dart-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dart1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/dog_main.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/jimothy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/yana.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +44,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2x3idR0j93ODKm1Yq3l5pHp1hwI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -42,9 +58,16 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/richie/PycharmProjects/Juliana-Space-Invaders",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\richie\PycharmProjects\Juliana-Space-Invaders\fonts" />
+      <recent name="C:\Users\richie\PycharmProjects\Juliana-Space-Invaders\images" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Juliana-Space-Invaders" />
@@ -90,6 +113,15 @@
       <option name="presentableId" value="Default" />
       <updated>1747173244828</updated>
     </task>
+    <task id="LOCAL-00001" summary="Project Setup &amp; basic game window">
+      <option name="closed" value="true" />
+      <created>1747173742812</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747173742813</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,5 +134,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project Setup &amp; basic game window" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project Setup &amp; basic game window" />
   </component>
 </project>
