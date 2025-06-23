@@ -69,6 +69,7 @@ DOGS_LATERAL_FREE = (RESOLUTION[0] - DOGS_COLUMNS * DOGS_LENGTH[0] - (DOGS_COLUM
 SAND_SEPARATION = (RESOLUTION[0] - 2 * LATERAL_LIMIT - SAND_BLOCKS * SAND_COLUMNS * SAND_LENGTH[0]) / (SAND_BLOCKS + 1)
 DOGS_FREE_MOVES = (DOGS_LATERAL_FREE - LATERAL_LIMIT) / DOGS_VELOCITY
 COLUMN4MOVE = (DOGS_LENGTH[0] + DOGS_SEPARATION[0]) / DOGS_VELOCITY
+
 class Yana(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -135,6 +136,93 @@ class DogsGroup(sprite.Group):
                     if self.bottom < dog.rect.y + DOGS_LENGTH[1]: self.bottom = dog.rect.y + DOGS_LENGTH[1]
             else:
                 for dog in self: dog.rect.x += self.direction * DOGS_VELOCITY
+                self.moveNumber += 1
+                self.timer += DOGS_UPDATE_TIME
+
+    def add_internal(self, *sprites):
+        super(DogsGroup, self).add_internal(*sprites)
+        for s in sprites: self.dogs[s.row][s.column] = s
+
+    def remove_internal(self, *sprites):
+        super(DogsGroup, self).remove_internal(*sprites)
+        for s in sprites: self.kill(s)
+
+    def is_column_dead(self, column):
+        return not any(self.dogs[row][column] for row in range(self.rows))
+
+    def random_bottom(self):
+        col = choice(self.aliveColumns)
+        col_dogs = (self.dogs[row - 1][col] for row in range(self.rows, 0, -1))
+        return next((en for en in col_dogs if en is not None), None)
+
+    def kill(self, dog):
+        self.dogs[dog.row][dog.column] = None
+        is_column_dead = self.is_column_dead(dog.column)
+        if is_column_dead: self.aliveColumns.remove(dog.column)
+        if dog.column == self.rightAliveColumn:
+             while self.rightAliveColumn > 0 and is_column_dead:
+                self.rightAliveColumn -= 1
+                self.rightAddMove += COLUMN4MOVE
+                is_column_dead = self.is_column_dead(self.rightAliveColumn)
+        elif dog.column == self.leftAliveColumn:
+            while self.leftAliveColumn < self.columns and is_column_dead:
+                self.leftAliveColumn += 1
+                self.leftAddMove += COLUMN4MOVE
+                is_column_dead = self.is_column_dead(self.leftAliveColumn)
+
+class Sand(sprite.Sprite):
+    def __init__(self, row, column):
+        sprite.Sprite.__init__(self)
+        self.row = row
+        self.column = column
+        self.image = transform.scale(IMAGES['sand'], SAND_LENGTH)
+        self.rect = self.image.get_rect()
+    def update(self, keys, *args):
+        game.screen.blit(self.image, self.rect)
+class Jimothy(sprite.Sprite):
+    def __init__(self):
+        sprite.Sprite.__init__(self)
+        self.image = transform.scale(IMAGES['jimothy'], JIMOTHY_LENGTH)
+        self.image_flipped = transform.flip(self.image, True, False)
+        self.rect = self.image.get_rect(midright = (0, JIMOTHY_MID))
+        self.direction = 1
+        self.oscilation = 1
+        self.timer = time.get_ticks()
+    def update(self, keys, currentTime, *args):
+        resetTimer = False
+        if currentTime - self.timer >= JIMOTHY_INTERVAL * self.oscilation:
+            if self.rect.left < RESOLUTION[0] and self.direction == 1: self.rect.x += JIMOTHY_SPEED
+            if self.rect.right > 0 and self.direction == -1: self.rect.x -= JIMOTHY_SPEED
+            if self.direction == 1: game.screen.blit(self.image, self.rect)
+            else: game.screen.blit(self.image_flipped, self.rect)
+        if self.rect.left >= RESOLUTION[0]:
+            self.direction = -1
+            resetTimer = True
+        if self.rect.right <= 0:
+            self.direction = 1
+            resetTimer = True
+        if currentTime - self.timer > JIMOTHY_INTERVAL * self.oscilation and resetTimer:
+            self.timer = currentTime
+            self.oscilation = uniform(1, 2)
+
+    def update(self, current_time, *args):
+        if 300 <= current_time - self.timer <= 600: game.screen.blit(self.image, self.rect)
+        elif 900 < current_time - self.timer: self.kill()
+class Life(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = transform.scale(IMAGES['yana'], LIFE_LENGTH)
+        self.rect = self.image.get_rect(center = (x,y))
+    def update(self, *args):
+        game.screen.blit(self.image, self.rect)
+class Text(object):
+    def __init__(self, textFont, size, message, color, position):
+        self.font = font.Font(textFont, size)
+        self.surface = self.font.render(message, True, color)
+        self.rect = self.surface.get_rect(center = position)
+    def draw(self, surface):
+        surface.blit(self.surface, self.rect)
+
 class Anniversary(object):
     def __init__(self):
         init()
@@ -165,37 +253,52 @@ class Anniversary(object):
         self.life = [Life(RESOLUTION[0] - i * (LIFE_LENGTH[0] + 10) - 30, 20) for i in range(YANA_LIVES)]
         self.livesGroup = sprite.Group(self.life[i] for i in range(YANA_LIVES))
 
-def main():
-    clock = pygame.time.Clock()
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                running = False
+    def make_sand_block(self, block_number):
+        sandGroup = sprite.Group()
+        for row in range(SAND_ROWS):
+            for column in range(SAND_COLUMNS):
+                sand = Sand(row, column)
+                sand.rect.x = LATERAL_LIMIT + block_number * SAND_COLUMNS * SAND_LENGTH[0] + (block_number + 1) * SAND_SEPARATION + column * SAND_LENGTH[0]
+                sand.rect.y = SAND_POSITION + (row * SAND_LENGTH[1])
+                sandGroup.add(sand)
+        return sandGroup
+    def check_input(self):
+        self.keys = key.get_pressed()
+        for e in event.get():
+            if e.type == QUIT: exit()
+            if e.type == KEYDOWN:
+                if e.key == K_SPACE:
+                    if len(self.darts) == 0 and self.yanaAlive:
+                        if self.score < SCORE_2DART:
+                            dart = Dart(self.player.rect.centerx, self.player.rect.y, -1)
+                            self.darts.add(dart)
+                            self.allSprites.add(self.darts)
+                        else:
+                            leftdart = Dart(self.player.rect.centerx -YANA_LENGTH[0] / 5, self.player.rect.y, -1)
+                            rightdart = Dart(self.player.rect.centerx +YANA_LENGTH[0] / 5, self.player.rect.y, -1)
+                            self.darts.add(leftdart)
+                            self.darts.add(rightdart)
+                            self.allSprites.add(self.darts)
 
-        screen.fill((0, 0, 0))  # Black background
-        pygame.display.update()
-        clock.tick(60)
-
-def main(self):
-    while True:
-        if self.mainScreen:
-            self.background = transform.scale(IMAGES['bgmain'], RESOLUTION)
-            self.screen.blit(self.background, (0, 0))
-            dog_main = transform.scale(IMAGES['dog_main'], (200,200))
-            self.screen.blit(dog_main, (RESOLUTION[0] / 2 + 150, RESOLUTION[1] / 2 - 190))
-            self.TextTitle.draw(self.screen)
-            self.TextBegin.draw(self.screen)
-            self.AnniversaryText.draw(self.screen)
-            for e in event.get():
-                if e.type == QUIT: exit()
-                if e.type == KEYUP:
-                    self.allSand = sprite.Group()
-                    for i in range(SAND_BLOCKS): self.allSand.add(self.make_sand_block(i))
-                    self.livesGroup.add(self.life[i] for i in range(YANA_LIVES))
-                    self.reset(0)
-                    self.startGame = True
-                    self.mainScreen = False
+    def main(self):
+        while True:
+            if self.mainScreen:
+                self.background = transform.scale(IMAGES['bgmain'], RESOLUTION)
+                self.screen.blit(self.background, (0, 0))
+                dog_main = transform.scale(IMAGES['dog_main'], (200,200))
+                self.screen.blit(dog_main, (RESOLUTION[0] / 2 + 150, RESOLUTION[1] / 2 - 190))
+                self.TextTitle.draw(self.screen)
+                self.TextBegin.draw(self.screen)
+                self.AnniversaryText.draw(self.screen)
+                for e in event.get():
+                    if e.type == QUIT: exit()
+                    if e.type == KEYUP:
+                        self.allSand = sprite.Group()
+                        for i in range(SAND_BLOCKS): self.allSand.add(self.make_sand_block(i))
+                        self.livesGroup.add(self.life[i] for i in range(YANA_LIVES))
+                        self.reset(0)
+                        self.startGame = True
+                        self.mainScreen = False
 
 if __name__ == '__main__':
     game = Anniversary()

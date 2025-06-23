@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality">
+    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="- Added Dog classes as Aliens&#10;- Setup game window &#10;- Setup game initialization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,15 +32,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/richie/PycharmProjects/Juliana-Space-Invaders",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/richie/PycharmProjects/Juliana-Space-Invaders&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\richie\PycharmProjects\Juliana-Space-Invaders\fonts" />
@@ -115,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750490054706</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- Added Dog classes as Aliens&#10;- Setup game window &#10;- Setup game initialization">
+      <option name="closed" value="true" />
+      <created>1750657479826</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750657479826</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,6 +141,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project Setup &amp; basic game window" />
     <MESSAGE value="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality" />
+    <MESSAGE value="- Added Dog classes as Aliens&#10;- Setup game window &#10;- Setup game initialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added Dog classes as Aliens&#10;- Setup game window &#10;- Setup game initialization" />
   </component>
 </project>
