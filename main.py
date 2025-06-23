@@ -83,6 +83,88 @@ class Yana(pygame.sprite.Sprite):
         if keys[K_RIGHT] and self.rect.right < RESOLUTION[0] - 10:
             self.rect.x += self.speed
 
+class Dart(sprite.Sprite):
+    def __init__(self, x, y, direction):
+        sprite.Sprite.__init__(self)
+        self.image = transform.scale(IMAGES['dart' + str(direction)], DART_LENGTH)
+        self.rect = self.image.get_rect(midtop = (x, y))
+        self.direction = direction
+    def update(self, keys, *args):
+        self.rect.y += self.direction * DART_SPEED[int(1 / 2.0 + self.direction / 2.0)]
+        if self.rect.top <= JIMOTHY_MID or self.rect.bottom >= RESOLUTION[1] - YANA_BOTTOM: self.kill()
+        game.screen.blit(self.image, self.rect)
+class Dog(sprite.Sprite):
+    def __init__(self, row, column):
+        sprite.Sprite.__init__(self)
+        self.row = row
+        self.column = column
+        self.image = transform.scale(IMAGES['dog' + str(self.row)], DOGS_LENGTH)
+        self.rect = self.image.get_rect()
+    def update(self, *args):
+        game.screen.blit(self.image, self.rect)
+
+class DogsGroup(sprite.Group):
+    def __init__(self,columns,rows):
+        sprite.Group.__init__(self)
+        self.dogs = [[None] * columns for _ in range(rows)]
+        self.columns = columns
+        self.rows = rows
+        self.leftAddMove = 0
+        self.rightAddMove = 0
+        self.direction = 1
+        self.rightMoves = DOGS_FREE_MOVES
+        self.leftMoves = DOGS_FREE_MOVES
+        self.moveNumber = DOGS_FREE_MOVES / 2 + 1
+        self.timer = time.get_ticks()
+        self.bottom = 0
+        self.aliveColumns = list(range(columns))
+        self.leftAliveColumn = 0
+        self.rightAliveColumn = columns - 1
+    def update(self, current_time):
+        if current_time - self.timer >= DOGS_UPDATE_TIME:
+            if self.direction == 1: max_move = self.rightMoves + self.rightAddMove
+            else: max_move = self.leftMoves + self.leftAddMove
+            if self.moveNumber >= max_move:
+                self.leftMoves = DOGS_FREE_MOVES + self.rightAddMove
+                self.rightMoves = DOGS_FREE_MOVES + self.leftAddMove
+                self.direction *= -1
+                self.moveNumber = 0
+                self.bottom = 0
+                for dog in self:
+                    dog.rect.y += DOGS_MOVE_DOWN
+                    if self.bottom < dog.rect.y + DOGS_LENGTH[1]: self.bottom = dog.rect.y + DOGS_LENGTH[1]
+            else:
+                for dog in self: dog.rect.x += self.direction * DOGS_VELOCITY
+class Anniversary(object):
+    def __init__(self):
+        init()
+        self.icon = transform.scale(IMAGES['icon'], (256, 256))
+        self.set_icon(self.icon)
+        self.clock = time.Clock()
+        self.multiplier = 1
+        self.caption = display.set_caption('ur gay')
+        self.screen = SCREEN
+        self.background = transform.scale(IMAGES['bgmain'], RESOLUTION)
+        self.startGame = False
+        self.mainScreen = True
+        self.gameOver = False
+        self.roundsWon = 0
+        self.displayWinningScreen = False
+        self.dogPosition = DOGS_TOP
+        self.TextTitle = Text(FONT_MAIN, 70, 'I Made This For U', (253, 253, 238), (RESOLUTION[0] / 2 + 100, RESOLUTION[1] / 2))
+        self.TextBegin = Text(FONT_BEGIN, 25, 'Press a key to continue', (255, 255, 255), (RESOLUTION[0] / 2, RESOLUTION[1] - 50))
+        self.gameOverText = Text(FONT_MAIN, 80, 'Game Over', (255, 255, 255), (RESOLUTION[0] / 2, RESOLUTION[1] / 2))
+        self.nextRoundText = Text(FONT_MAIN, 50, 'Next Round', (100, 120, 100), (RESOLUTION[0] / 2, RESOLUTION[1] / 2))
+        self.winText = Text(FONT_MAIN, 70, 'Can I Be Your Boyfriend?', (128, 0, 128),
+                       (RESOLUTION[0] / 2, RESOLUTION[1] / 2 + 200))
+        self.winText2 = Text(FONT_MAIN, 70, "let's have shrex", (196, 211, 0),
+                            (RESOLUTION[0] / 2, RESOLUTION[1] - 50))
+        self.AnniversaryText = Text(FONT_ANNIVERSARY, 40, 'Hey cutie', (255, 255, 255), (RESOLUTION[0] / 2  , RESOLUTION[1] / 2 - 40))
+        self.scoreText = Text(FONT_MAIN, 20, 'Score', (255, 255, 255), (50, 20))
+        self.livesText = Text(FONT_MAIN, 20, 'Lives', (255, 255, 255), (RESOLUTION[0] - 3 * (LIFE_LENGTH[0] + 10) - 120, 20))
+        self.life = [Life(RESOLUTION[0] - i * (LIFE_LENGTH[0] + 10) - 30, 20) for i in range(YANA_LIVES)]
+        self.livesGroup = sprite.Group(self.life[i] for i in range(YANA_LIVES))
+
 def main():
     clock = pygame.time.Clock()
     running = True
@@ -95,6 +177,26 @@ def main():
         pygame.display.update()
         clock.tick(60)
 
+def main(self):
+    while True:
+        if self.mainScreen:
+            self.background = transform.scale(IMAGES['bgmain'], RESOLUTION)
+            self.screen.blit(self.background, (0, 0))
+            dog_main = transform.scale(IMAGES['dog_main'], (200,200))
+            self.screen.blit(dog_main, (RESOLUTION[0] / 2 + 150, RESOLUTION[1] / 2 - 190))
+            self.TextTitle.draw(self.screen)
+            self.TextBegin.draw(self.screen)
+            self.AnniversaryText.draw(self.screen)
+            for e in event.get():
+                if e.type == QUIT: exit()
+                if e.type == KEYUP:
+                    self.allSand = sprite.Group()
+                    for i in range(SAND_BLOCKS): self.allSand.add(self.make_sand_block(i))
+                    self.livesGroup.add(self.life[i] for i in range(YANA_LIVES))
+                    self.reset(0)
+                    self.startGame = True
+                    self.mainScreen = False
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    game = Anniversary()
+    game.main()

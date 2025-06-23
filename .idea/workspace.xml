@@ -4,30 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="Project Setup &amp; basic game window">
-      <change afterPath="$PROJECT_DIR$/fonts/Copperplate.ttc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/Courier New Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/Phosphate.ttc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/SnellRoundhand.ttc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Sand.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/bggame.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/bggameover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/bgmain.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/bgwin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dart-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dart1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/dog_main.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/jimothy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/yana.png" afterDir="false" />
+    <list default="true" id="cf81e915-48d5-45f0-ba2d-47a5980a84b9" name="Changes" comment="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +99,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747173742813</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality">
+      <option name="closed" value="true" />
+      <created>1750489983893</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750489983893</updated>
+    </task>
+    <task id="LOCAL-00003" summary="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality">
+      <option name="closed" value="true" />
+      <created>1750490054706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750490054706</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +131,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project Setup &amp; basic game window" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project Setup &amp; basic game window" />
+    <MESSAGE value="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added constants for game&#10;- Added fonts and photos&#10;- Added more imports for game functionality" />
   </component>
 </project>
